@@ -13,15 +13,18 @@ describe('alchemy-app routes', () => {
     pool.end();
   });
 
-  test('creates a book', async () => {
-    const expected = {
+  it('creates a book', async () => {
+    const expected = 
+    {
       title: 'The Sun Also Rises',
       author: 'Ernest Hemingway',
-      pubish_date: 1926,
+      date: 1926,
       pages: 272,
     };
 
-    const res = await request(app).get('/api/v1/books');
+    const res = await request(app)
+      .post('/api/v1/books')
+      .send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
