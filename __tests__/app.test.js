@@ -30,7 +30,7 @@ describe('alchemy-app routes', () => {
   });
 
   it('gets a list of books', async () => {
-    const expected = await Book.getAll();
+    const expected = await Book.getAllBooks();
 
     const res = await request(app).get('/api/v1/books');
 
