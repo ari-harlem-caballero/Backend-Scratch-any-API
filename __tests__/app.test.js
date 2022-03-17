@@ -46,15 +46,16 @@ describe('alchemy-app routes', () => {
   });
 
   it('should update a book based on ID', async () => {
-    const book = await Book.insert({ title: 'Mine', author: 'Yours' });
+    const book = await Book.insert({ title: 'Mine', author: 'Yours', date: 2000, pages: 100 });
+    
     const res = await request(app)
       .patch(`/api/v1/books/${book.id}`)
-      .send({ title: 'Memy', author: 2, date: 2000, pages: 100, });
+      .send({ title: 'Memy' });
 
     const expected = {
       id: expect.any(String),
       title: 'Memy',
-      author: 2,
+      author: 'Yours',
       date: 2000,
       pages: 100,
     };
