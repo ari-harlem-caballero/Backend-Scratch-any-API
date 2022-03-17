@@ -49,12 +49,12 @@ describe('alchemy-app routes', () => {
     const book = await Book.insert({ title: 'Mine', author: 'Yours' });
     const res = await request(app)
       .patch(`/api/v1/books/${book.id}`)
-      .send({ title: 'Me-my', author: 'You-yours' });
+      .send({ title: 'Memy', author: 2, date: 2000, pages: 100, });
 
     const expected = {
       id: expect.any(String),
-      title: 'Me-my',
-      author: 'You-yours',
+      title: 'Memy',
+      author: 2,
       date: 2000,
       pages: 100,
     };
