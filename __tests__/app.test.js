@@ -36,4 +36,12 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets single book based on ID', async () => {
+    const expected = await Book.getBookById(1);
+
+    const res = await request(app).get(`/api/v1/books/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
 });
