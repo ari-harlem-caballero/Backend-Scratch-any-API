@@ -44,4 +44,22 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('should update a book based on ID', async () => {
+    const book = await Book.insert({ title: 'Mine', author: 'Yours' });
+    const res = await request(app)
+      .patch(`/api/v1/books/${book.id}`)
+      .send({ title: 'Me-my', author: 'You-yours' });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Me-my',
+      author: 'You-yours',
+      date: 2000,
+      pages: 100,
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Book.getBookById(book.id)).toEqual(expected);
+  });
 });
